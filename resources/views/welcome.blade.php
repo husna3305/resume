@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ $setting->meta_description }}">
     <title>Portfolio Website</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -669,12 +670,11 @@
                             <!-- Item Project -->
                             <div class="project-card relative rounded-xl overflow-hidden shadow-md">
                                 <div class="bg-gradient-to-br from-blue-400 to-blue-500 h-55 flex items-center justify-center">
-                                    {{-- <i class="fas fa-shopping-cart text-white text-5xl"></i> --}}
                                     @php
                                         $thumb = explode('.', $item->path_gambar);
                                         $thumb = $thumb[0] . '-thumb.' . end($thumb);
                                     @endphp
-                                    <img src="{{ asset('storage/' . $thumb) }}" alt="{{ $item->nama }}" class="w-full h-full object-cover">
+                                    <img src="{{ asset('storage/' . $thumb) }}" alt="{{ $item->nama }}" class="w-full h-full object-cover" loading="lazy">
                                 </div>
                                 <div class="p-4 bg-white">
                                     <h5 class="text-lg font-semibold text-gray-800">{{ $item->nama }}</h5>
