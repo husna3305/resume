@@ -1,0 +1,903 @@
+
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - {{ $setting->nama_lengkap }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .cv-container {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+        }
+
+        .sidebar {
+            width: 30%;
+        }
+
+        .main-content {
+            width: 70%;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2563eb;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #2563eb;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #2563eb;
+            overflow: hidden;
+            margin-right: 20px;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-name h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .profile-title {
+            font-size: 16px;
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-icon {
+            width: 20px;
+            margin-right: 10px;
+            color: #2563eb;
+            text-align: center;
+        }
+
+        .skill-item {
+            margin-bottom: 10px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background-color: #e5e7eb;
+            border-radius: 4px;
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            background-color: #2563eb;
+        }
+
+        .timeline-item {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #2563eb;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .timeline-period {
+            color: #2563eb;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .timeline-subtitle {
+            font-weight: 500;
+            color: #4b5563;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .portfolio-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .portfolio-image {
+            height: 120px;
+            background-color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .portfolio-content {
+            padding: 10px;
+        }
+
+        .portfolio-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .portfolio-description {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 5px;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .tag {
+            background-color: #e0e7ff;
+            color: #4338ca;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .publication-item {
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 3px solid #2563eb;
+        }
+
+        .publication-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .publication-source {
+            font-size: 14px;
+            color: #4b5563;
+            margin-bottom: 3px;
+        }
+
+        .publication-description {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .service-item {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .service-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #e0e7ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .service-content {
+            flex-grow: 1;
+        }
+
+        .service-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .service-period {
+            font-size: 14px;
+            color: #4b5563;
+            margin-bottom: 3px;
+        }
+
+        .service-description {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-link {
+            color: #2563eb;
+            font-size: 18px;
+        }
+
+        /* Certificate styles */
+        .certificate-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .certificate-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #f9fafb;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .certificate-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .certificate-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #dbeafe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .certificate-title {
+            font-weight: 600;
+            font-size: 15px;
+            color: #1f2937;
+        }
+
+        .certificate-issuer {
+            font-size: 13px;
+            color: #4b5563;
+            margin-bottom: 5px;
+        }
+
+        .certificate-date {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+
+        .certificate-description {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: auto;
+        }
+
+        .certificate-credential {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+        }
+
+        .certificate-credential i {
+            margin-right: 5px;
+            font-size: 10px;
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body {
+                font-size: 12px;
+                line-height: 1.5;
+            }
+
+            .container {
+                padding: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .section {
+                margin-bottom: 15px;
+            }
+
+            .section-title {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+
+            .profile-image {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile-name h1 {
+                font-size: 24px;
+            }
+
+            .timeline-item {
+                margin-bottom: 12px;
+            }
+
+            .portfolio-image {
+                height: 80px;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+
+            .certificate-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .certificate-item {
+                padding: 10px;
+            }
+
+            .certificate-icon {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cv-container">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Profile Section -->
+                <div class="section">
+                    <div class="profile-header">
+                        <div class="profile-image">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%232563eb'/%3E%3Ccircle cx='60' cy='50' r='25' fill='white'/%3E%3Cpath d='M30,100 C30,70 90,70 90,100' fill='white'/%3E%3C/svg%3E" alt="Profile Photo">
+                        </div>
+                        <div class="profile-name">
+                            <h1>{{ $setting->nama_lengkap }}</h1>
+                            <div class="profile-title">Creative Director & Designer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="section">
+                    <h2 class="section-title">Kontak</h2>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>johndoe@example.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>+62 123 4567 890</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>Jakarta, Indonesia</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div>www.johndoe.com</div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+
+                <!-- About Me -->
+                <div class="section">
+                    <h2 class="section-title">Tentang Saya</h2>
+                    <p>Seorang profesional kreatif dengan pengalaman lebih dari 10 tahun dalam desain grafis, pengembangan web, dan manajemen proyek kreatif. Berfokus pada solusi desain yang berpusat pada pengguna dan hasil yang terukur.</p>
+                </div>
+
+                <!-- Skills -->
+                <div class="section">
+                    <h2 class="section-title">Keahlian</h2>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Web Design</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Graphic Design</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>UI/UX Design</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Photography</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Project Management</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Languages -->
+                <div class="section">
+                    <h2 class="section-title">Bahasa</h2>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Bahasa Indonesia</span>
+                            <span>Native</span>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>English</span>
+                            <span>Fluent</span>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Mandarin</span>
+                            <span>Basic</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Education Section -->
+                <div class="section">
+                    <h2 class="section-title">Pendidikan</h2>
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">S2 Desain Komunikasi Visual</div>
+                            <div class="timeline-period">2015 - 2017</div>
+                        </div>
+                        <div class="timeline-subtitle">Institut Teknologi Bandung</div>
+                        <div class="timeline-content">
+                            Lulus dengan predikat cum laude. Tesis: "Pengaruh Desain UI/UX terhadap Pengalaman Pengguna dalam Aplikasi Mobile Banking"
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">S1 Desain Grafis</div>
+                            <div class="timeline-period">2011 - 2015</div>
+                        </div>
+                        <div class="timeline-subtitle">Universitas Indonesia</div>
+                        <div class="timeline-content">
+                            Aktif dalam organisasi kampus sebagai Ketua Himpunan Mahasiswa Desain. Skripsi: "Analisis Elemen Visual dalam Branding Startup Digital Indonesia"
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">Digital Marketing Certification</div>
+                            <div class="timeline-period">2018</div>
+                        </div>
+                        <div class="timeline-subtitle">Google Digital Garage</div>
+                        <div class="timeline-content">
+                            Sertifikasi profesional dalam bidang digital marketing, SEO, dan analisis data.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificates Section -->
+                <div class="section">
+                    <h2 class="section-title">Sertifikat</h2>
+                    <div class="certificate-grid">
+                        <!-- Certificate 1 -->
+                        <div class="certificate-item">
+                            <div class="certificate-header">
+                                <div class="certificate-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <div class="certificate-title">Adobe Certified Expert (ACE)</div>
+                            </div>
+                            <div class="certificate-issuer">Adobe Systems</div>
+                            <div class="certificate-date">Diterbitkan: Mei 2022 · Tidak Kedaluwarsa</div>
+                            <div class="certificate-description">
+                                Sertifikasi profesional untuk Adobe Creative Suite, termasuk Photoshop, Illustrator, dan InDesign.
+                            </div>
+                            <div class="certificate-credential">
+                                <i class="fas fa-link"></i> Credential ID: ADB-12345-XYZ
+                            </div>
+                        </div>
+
+                        <!-- Certificate 2 -->
+                        <div class="certificate-item">
+                            <div class="certificate-header">
+                                <div class="certificate-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <div class="certificate-title">UI/UX Design Professional</div>
+                            </div>
+                            <div class="certificate-issuer">Nielsen Norman Group</div>
+                            <div class="certificate-date">Diterbitkan: Januari 2021 · Tidak Kedaluwarsa</div>
+                            <div class="certificate-description">
+                                Sertifikasi komprehensif dalam desain antarmuka pengguna dan pengalaman pengguna.
+                            </div>
+                            <div class="certificate-credential">
+                                <i class="fas fa-link"></i> Credential ID: NNG-UX-78901
+                            </div>
+                        </div>
+
+                        <!-- Certificate 3 -->
+                        <div class="certificate-item">
+                            <div class="certificate-header">
+                                <div class="certificate-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <div class="certificate-title">Project Management Professional (PMP)</div>
+                            </div>
+                            <div class="certificate-issuer">Project Management Institute</div>
+                            <div class="certificate-date">Diterbitkan: Maret 2020 · Berlaku hingga Maret 2023</div>
+                            <div class="certificate-description">
+                                Sertifikasi internasional dalam manajemen proyek dan metodologi agile.
+                            </div>
+                            <div class="certificate-credential">
+                                <i class="fas fa-link"></i> Credential ID: PMI-PMP-456789
+                            </div>
+                        </div>
+
+                        <!-- Certificate 4 -->
+                        <div class="certificate-item">
+                            <div class="certificate-header">
+                                <div class="certificate-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <div class="certificate-title">Front-End Web Developer</div>
+                            </div>
+                            <div class="certificate-issuer">freeCodeCamp</div>
+                            <div class="certificate-date">Diterbitkan: Juli 2019 · Tidak Kedaluwarsa</div>
+                            <div class="certificate-description">
+                                Sertifikasi dalam pengembangan web front-end, termasuk HTML, CSS, JavaScript, dan framework modern.
+                            </div>
+                            <div class="certificate-credential">
+                                <i class="fas fa-link"></i> Credential ID: FCC-FE-123456
+                            </div>
+                        </div>
+
+                        <!-- Certificate 5 -->
+                        <div class="certificate-item">
+                            <div class="certificate-header">
+                                <div class="certificate-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <div class="certificate-title">Digital Marketing Specialist</div>
+                            </div>
+                            <div class="certificate-issuer">HubSpot Academy</div>
+                            <div class="certificate-date">Diterbitkan: November 2020 · Berlaku hingga November 2022</div>
+                            <div class="certificate-description">
+                                Sertifikasi dalam strategi pemasaran digital, SEO, konten marketing, dan analitik.
+                            </div>
+                            <div class="certificate-credential">
+                                <i class="fas fa-link"></i> Credential ID: HS-DM-567890
+                            </div>
+                        </div>
+
+                        <!-- Certificate 6 -->
+                        <div class="certificate-item">
+                            <div class="certificate-header">
+                                <div class="certificate-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <div class="certificate-title">Scrum Master Certified (SMC)</div>
+                            </div>
+                            <div class="certificate-issuer">Scrum Alliance</div>
+                            <div class="certificate-date">Diterbitkan: Februari 2021 · Berlaku hingga Februari 2023</div>
+                            <div class="certificate-description">
+                                Sertifikasi dalam metodologi Scrum dan praktik Agile untuk manajemen proyek.
+                            </div>
+                            <div class="certificate-credential">
+                                <i class="fas fa-link"></i> Credential ID: SA-SMC-345678
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Experience Section -->
+                <div class="section page-break">
+                    <h2 class="section-title">Pengalaman Kerja</h2>
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">Creative Director</div>
+                            <div class="timeline-period">2020 - Sekarang</div>
+                        </div>
+                        <div class="timeline-subtitle">Digital Creative Studio</div>
+                        <div class="timeline-content">
+                            <ul style="padding-left: 15px; margin-top: 5px;">
+                                <li>Memimpin tim kreatif yang terdiri dari 15 desainer dan developer</li>
+                                <li>Mengelola proyek desain untuk klien nasional dan internasional</li>
+                                <li>Mengembangkan strategi branding dan identitas visual untuk berbagai industri</li>
+                                <li>Meningkatkan pendapatan perusahaan sebesar 35% dalam 2 tahun</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">Senior UI/UX Designer</div>
+                            <div class="timeline-period">2017 - 2020</div>
+                        </div>
+                        <div class="timeline-subtitle">Tech Startup Inc.</div>
+                        <div class="timeline-content">
+                            <ul style="padding-left: 15px; margin-top: 5px;">
+                                <li>Merancang antarmuka pengguna untuk aplikasi mobile dan web</li>
+                                <li>Melakukan riset pengguna dan pengujian kegunaan</li>
+                                <li>Berkolaborasi dengan tim pengembang untuk implementasi desain</li>
+                                <li>Meningkatkan metrik retensi pengguna sebesar 40%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">Graphic Designer</div>
+                            <div class="timeline-period">2015 - 2017</div>
+                        </div>
+                        <div class="timeline-subtitle">Creative Agency</div>
+                        <div class="timeline-content">
+                            <ul style="padding-left: 15px; margin-top: 5px;">
+                                <li>Membuat desain untuk berbagai media cetak dan digital</li>
+                                <li>Mengembangkan identitas visual untuk klien korporat</li>
+                                <li>Berkolaborasi dengan tim pemasaran untuk kampanye iklan</li>
+                                <li>Memenangkan penghargaan desain nasional untuk kampanye sosial</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Section -->
+                <div class="section">
+                    <h2 class="section-title">Portfolio</h2>
+                    <div class="portfolio-grid">
+                        <!-- Portfolio Item 1 -->
+                        <div class="portfolio-item">
+                            <div class="portfolio-image">
+                                <i class="fas fa-laptop fa-2x"></i>
+                            </div>
+                            <div class="portfolio-content">
+                                <div class="portfolio-title">Web Design Project</div>
+                                <div class="portfolio-description">Desain website modern untuk perusahaan teknologi</div>
+                                <div class="tag-container">
+                                    <span class="tag">HTML/CSS</span>
+                                    <span class="tag">JavaScript</span>
+                                    <span class="tag">UI/UX</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Portfolio Item 2 -->
+                        <div class="portfolio-item">
+                            <div class="portfolio-image" style="background-color: #db2777;">
+                                <i class="fas fa-camera fa-2x"></i>
+                            </div>
+                            <div class="portfolio-content">
+                                <div class="portfolio-title">Photography Project</div>
+                                <div class="portfolio-description">Sesi fotografi produk untuk katalog online</div>
+                                <div class="tag-container">
+                                    <span class="tag">Photography</span>
+                                    <span class="tag">Editing</span>
+                                    <span class="tag">Lighting</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Portfolio Item 3 -->
+                        <div class="portfolio-item">
+                            <div class="portfolio-image" style="background-color: #d97706;">
+                                <i class="fas fa-paint-brush fa-2x"></i>
+                            </div>
+                            <div class="portfolio-content">
+                                <div class="portfolio-title">Branding Project</div>
+                                <div class="portfolio-description">Pembuatan identitas visual untuk startup</div>
+                                <div class="tag-container">
+                                    <span class="tag">Branding</span>
+                                    <span class="tag">Logo Design</span>
+                                    <span class="tag">Identity</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Portfolio Item 4 -->
+                        <div class="portfolio-item">
+                            <div class="portfolio-image" style="background-color: #16a34a;">
+                                <i class="fas fa-mobile-alt fa-2x"></i>
+                            </div>
+                            <div class="portfolio-content">
+                                <div class="portfolio-title">Mobile App Design</div>
+                                <div class="portfolio-description">Desain UI/UX untuk aplikasi mobile kesehatan</div>
+                                <div class="tag-container">
+                                    <span class="tag">UI/UX</span>
+                                    <span class="tag">Mobile</span>
+                                    <span class="tag">Prototyping</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Publications Section -->
+                <div class="section page-break">
+                    <h2 class="section-title">Publikasi</h2>
+                    <div class="publication-item">
+                        <div class="publication-title">Pengaruh Desain Visual terhadap Pengalaman Pengguna dalam E-commerce</div>
+                        <div class="publication-source">Jurnal Desain Komunikasi Visual Indonesia, Vol. 12, No. 3, 2021</div>
+                        <div class="publication-description">Penelitian tentang bagaimana elemen desain visual mempengaruhi keputusan pembelian dan pengalaman pengguna dalam platform e-commerce.</div>
+                    </div>
+                    <div class="publication-item">
+                        <div class="publication-title">Evolusi Desain UI/UX dalam Aplikasi Mobile Banking di Indonesia</div>
+                        <div class="publication-source">International Journal of Digital Design, Vol. 8, No. 2, 2019</div>
+                        <div class="publication-description">Studi komparatif tentang perubahan desain antarmuka aplikasi mobile banking di Indonesia selama periode 2015-2019.</div>
+                    </div>
+                    <div class="publication-item">
+                        <div class="publication-title">Buku: Prinsip Dasar Desain UI/UX untuk Pemula</div>
+                        <div class="publication-source">Penerbit Gramedia, 2020</div>
+                        <div class="publication-description">Buku panduan praktis tentang prinsip-prinsip dasar desain UI/UX untuk pemula, dengan studi kasus dan latihan praktis.</div>
+                    </div>
+                </div>
+
+                <!-- Community Service Section -->
+                <div class="section">
+                    <h2 class="section-title">Pengabdian Masyarakat</h2>
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-title">Mentor Program Desain untuk Pemuda</div>
+                            <div class="service-period">2019 - Sekarang</div>
+                            <div class="service-description">Menjadi mentor sukarela untuk program pelatihan desain grafis bagi pemuda dari daerah kurang mampu, membantu mereka mengembangkan keterampilan untuk memasuki industri kreatif.</div>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-title">Workshop Desain untuk UMKM</div>
+                            <div class="service-period">2018 - 2020</div>
+                            <div class="service-description">Menyelenggarakan workshop desain dan branding untuk pelaku UMKM, membantu mereka meningkatkan identitas visual produk dan pemasaran online.</div>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-title">Kampanye Desain untuk Lingkungan</div>
+                            <div class="service-period">2020</div>
+                            <div class="service-description">Merancang dan mengelola kampanye visual untuk kesadaran lingkungan, bekerja sama dengan organisasi non-profit untuk mengurangi penggunaan plastik sekali pakai.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Print button - only visible on screen -->
+    <div class="no-print" style="text-align: center; margin: 30px 0;">
+        <button onclick="window.print()" style="background-color: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: 500;">
+            <i class="fas fa-print" style="margin-right: 8px;"></i> Cetak CV
+        </button>
+    </div>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94d00ea47677ce8a',t:'MTc0OTQ2NjExMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
