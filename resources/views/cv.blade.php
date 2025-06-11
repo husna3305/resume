@@ -618,7 +618,7 @@
 
                 <!-- Portfolio Section -->
                 <div class="section">
-                    <h2 class="section-title">Portfolio</h2>
+                    <h2 class="section-title">Portofolio</h2>
                     <div class="portfolio-grid">
                         @foreach ($list_portfolio as $item)
                             <div class="portfolio-item">

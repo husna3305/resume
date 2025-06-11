@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ $setting->meta_description }}">
-    <title>Portfolio Website</title>
+    <title>Portofolio Website</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <style>
@@ -235,7 +235,7 @@
                             <a href="#portfolio"
                                 class="nav-link flex items-center px-4 py-3 rounded-lg hover:bg-blue-600 transition-colors">
                                 <i class="fas fa-laptop-code w-6"></i>
-                                <span>Portfolio</span>
+                                <span>Portofolio</span>
                             </a>
                         </li>
                         <li>
@@ -662,7 +662,7 @@
                         <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
                             <i class="fas fa-laptop-code text-blue-600"></i>
                         </div>
-                        <h2 class="text-2xl font-bold text-gray-800">Portfolio</h2>
+                        <h2 class="text-2xl font-bold text-gray-800">Portofolio</h2>
                     </div>
 
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
